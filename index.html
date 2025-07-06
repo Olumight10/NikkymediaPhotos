@@ -56,27 +56,59 @@
     }
 
     .hero {
-      background: url('https://images.unsplash.com/photo-1529626455594-4ff0802cfb7e?auto=format&fit=crop&w=1600&q=80') center/cover no-repeat;
+      position: relative;
       height: 90vh;
-      display: flex;
-      align-items: center;
-      justify-content: center;
+      overflow: hidden;
+    }
+
+    .slide {
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      opacity: 0;
+      transition: opacity 1s ease-in-out;
+    }
+
+    .slide.active {
+      opacity: 1;
+    }
+
+    .hero-text {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
       text-align: center;
       color: #fff;
       text-shadow: 2px 2px 6px #000;
     }
 
-    .hero h2 {
+    .hero-text h2 {
       font-size: 4rem;
       font-family: 'Montserrat', sans-serif;
     }
 
     .gallery {
       padding: 4rem 2rem;
+      background: #121212;
+    }
+
+
+
+
+    .gallery {
       display: grid;
       grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
       gap: 2rem;
-      background: #121212;
+    }
+
+    .gallery-item {
+      display: none;
+    }
+
+    .gallery-item.show {
+      display: block;
     }
 
     .gallery img {
@@ -87,7 +119,6 @@
       box-shadow: 0 4px 20px rgba(0,0,0,0.6);
       transition: transform 0.4s ease;
     }
-
 
     .gallery img:hover {
       transform: scale(1.05);
@@ -146,29 +177,39 @@
   </style>
 </head>
 <body>
+
   <header>
     <h1>NikkyMedia Photos</h1>
     <p>Creative. Passionate. Timeless Photography.</p>
   </header>
+
   <nav>
     <a href="#">Home</a>
     <a href="#gallery">Gallery</a>
     <a href="#contact">Contact</a>
   </nav>
+
+  <!-- Hero Slideshow -->
   <section class="hero">
-    <h2>Every Shot Tells a Story</h2>
+    <img src="hero1.jpeg" class="slide active" alt="hero1"/>
+    <img src="hero2.jpg" class="slide" alt="hero2"/>
+    <img src="hero5.jpg" class="slide" alt="hero3"/>
+    <div class="hero-text">
+      <h2>Every Shot Tells a Story</h2>
+    </div>
   </section>
+
+  <!-- Gallery with Filters -->
   <section id="gallery" class="gallery">
-    <img src="https://images.unsplash.com/photo-1592194996308-7b43878e84a6?auto=format&fit=crop&w=800&q=80" alt="Portrait">
-    <img src="https://images.unsplash.com/photo-1509395176047-4a66953fd231?auto=format&fit=crop&w=800&q=80" alt="Wedding">
-    <img src="https://images.unsplash.com/photo-1526170375885-4d8ecf77b99f?auto=format&fit=crop&w=800&q=80" alt="Studio">
-    <img src="https://images.unsplash.com/photo-1517841905240-472988babdf9?auto=format&fit=crop&w=800&q=80" alt="Fashion">
-    <img src="https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&w=800&q=80" alt="Nature">
-    <img src="https://images.unsplash.com/photo-1559628233-9e4ad7c4fdf8?auto=format&fit=crop&w=800&q=80" alt="Events">
-
-
-
+      <img src="portrait.webp" alt="Portrait">
+      <img src="wedding.avif" alt="Wedding">
+      <img src="studio.avif" alt="Studio">
+      <img src="fashion.avif" alt="Fashion">
+      <img src="nature.avif" alt="Nature">
+      <img src="event.webp" alt="Event">
   </section>
+
+  <!-- Contact Section -->
   <section id="contact" class="contact">
     <h3>Let's Work Together</h3>
     <form>
@@ -178,8 +219,22 @@
       <button type="submit">Send Message</button>
     </form>
   </section>
+
   <footer>
     &copy; 2025 NikkyMedia Photos. All rights reserved.
   </footer>
+
+  <script>
+    // Hero slideshow
+    let slides = document.querySelectorAll('.slide');
+    let index = 0;
+
+    setInterval(() => {
+      slides[index].classList.remove('active');
+      index = (index + 1) % slides.length;
+      slides[index].classList.add('active');
+    }, 5000); // 5 seconds per slide
+
+  </script>
 </body>
 </html>
