@@ -1136,11 +1136,13 @@
     // Event listeners for modal
     closeModal.addEventListener('click', () => {
       modal.style.display = 'none';
+
       // Pause any playing video
       const video = modalContent.querySelector('video');
       if (video) {
         video.pause();
       }
+      
     });
 
     nextModal.addEventListener('click', nextModalItem);
@@ -1167,7 +1169,14 @@
       mainPage.style.display = 'none';
       showroomPage.style.display = 'block';
       document.querySelector('.nav-gallery').classList.add('active');
+      
+      // Reset scroll to top
+      window.scrollTo({
+        top: 0,
+        behavior: "smooth" // or "auto" if you don’t want animation
+      });
     });
+
 
     // Navigation functionality
     document.querySelectorAll('nav a').forEach(link => {
